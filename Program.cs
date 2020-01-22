@@ -42,6 +42,12 @@ namespace DoblyCollection
                 Console.WriteLine($"Serial Number: {x.SerialNumber}; Name: {x.Name}");
             }
 
+            Console.WriteLine("=============================");
+            foreach (var x in List.BackEnumerator())
+            {
+                Console.WriteLine($"Serial Number: {x.SerialNumber}; Name: {x.Name}");
+            }
+
             Console.ReadKey();
         }
     }

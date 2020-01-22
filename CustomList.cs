@@ -11,7 +11,7 @@ namespace DoblyCollection
     {
         Node<T> Head; //link on first element
         Node<T> Tail; //link on Last element
-        int count;
+        protected int count;
         public T this[int index]
         {
             get
@@ -28,6 +28,7 @@ namespace DoblyCollection
         public virtual void Add(T value)
         {
             Node<T> NodeValue = new Node<T>(value);
+            GetNodeType(ref NodeValue, value);
 
             if (Head == null)
             {
@@ -39,6 +40,11 @@ namespace DoblyCollection
             }
             Tail = NodeValue;
             count++;
+        }
+
+        protected virtual void GetNodeType(ref Node<T> NodeValue, T value)
+        {
+            //NodeValue = new Node<T>(value);
         }
 
         public virtual bool Delete(T data)
