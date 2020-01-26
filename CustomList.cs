@@ -9,8 +9,8 @@ namespace DoblyCollection
 {
     class CustomList<T> : IEnumerable<T>, ICustomList<T>
     {
-        Node<T> Head; //link on first element
-        Node<T> Tail; //link on Last element
+        protected Node<T> Head; //link on first element
+        protected Node<T> Tail; //link on Last element
         protected int count;
         public T this[int index]
         {
@@ -27,8 +27,7 @@ namespace DoblyCollection
 
         public virtual void Add(T value)
         {
-            Node<T> NodeValue = new Node<T>(value);
-            GetNodeType(ref NodeValue, value);
+            var NodeValue = GetNodeType(value);
 
             if (Head == null)
             {
@@ -36,15 +35,22 @@ namespace DoblyCollection
             }
             else
             {
-                Tail.Next = NodeValue;
+                GetTail(NodeValue, Tail);
+                //Tail.Next = NodeValue;
             }
             Tail = NodeValue;
             count++;
         }
 
-        protected virtual void GetNodeType(ref Node<T> NodeValue, T value)
+        protected virtual Node<T> GetNodeType(T value)
         {
-            //NodeValue = new Node<T>(value);
+            Node<T> node = new Node<T>(value);
+            return node;
+        }
+
+        protected virtual void GetTail(Node<T> NodeValue, Node<T> Tail)
+        {
+            Tail.Next = NodeValue;
         }
 
         public virtual bool Delete(T data)

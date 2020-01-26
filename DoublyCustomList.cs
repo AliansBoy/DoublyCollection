@@ -12,22 +12,39 @@ namespace DoblyCollection
         DoublyNode<T> Tail; //link on Last element
         public override void Add(T value)
         {
-            DoublyNode<T> NodeValue = new DoublyNode<T>(value);
+            //var DoublyNodeValue = new DoublyNode<T>(value);
             base.Add(value);
             if (Head == null)
-                NodeValue.Previous = Tail;
-            Tail = NodeValue;
+            {
+                Head = (DoublyNode<T>)base.Head;
+                
+            }
+            //else
+            //{
+            //    DoublyNodeValue.Previous = Tail;
+            //}
+            Tail = (DoublyNode<T>)base.Tail;
 
         }
 
-        protected override void GetNodeType(ref Node<T> node, T value)
+        protected override Node<T> GetNodeType(T value)
         {
-            node = new DoublyNode<T>(value);
+            DoublyNode<T> node = new DoublyNode<T>(value);
+            return node;
+        }
+
+        protected override void GetTail(Node<T> NodeValue, Node<T> Tail)
+        {
+            base.GetTail(NodeValue, Tail);
+            ((DoublyNode<T>)NodeValue).Previous = (DoublyNode<T>)Tail;
         }
 
         public override bool Delete(T value)
         {
             DoublyNode<T> current = Head;
+            DoublyNode<T> currentHead = Head;
+            DoublyNode<T> currentTail = Tail;
+
 
             while (current != null)
             {
@@ -35,7 +52,17 @@ namespace DoblyCollection
                 {
                     break;
                 }
-                current = (DoublyNode<T>)current.Next;
+                if (currentHead.Element.Equals(value))
+                {
+                    current = currentHead;
+                }
+                if (currentTail.Element.Equals(value))
+                {
+                    current = currentHead;
+                }
+                currentHead = (DoublyNode<T>)currentHead.Next;
+                currentTail = (DoublyNode<T>)currentTail.Previous;
+
             }
             if (current != null)
             {
