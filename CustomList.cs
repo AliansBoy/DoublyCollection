@@ -47,7 +47,7 @@ namespace DoblyCollection
             return node;
         }
 
-        protected virtual void setTail(Node<T> NodeValue/*, Node<T> Tail*/)
+        protected virtual void setTail(Node<T> NodeValue)
         {
             Tail.Next = NodeValue;
         }

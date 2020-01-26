@@ -10,15 +10,7 @@ namespace DoblyCollection
     {
         public override void Add(T value)
         {
-            var DoublyNodeValue = new DoublyNode<T>(value);
-            base.Add(value);
-            if (Head == null)
-            {
-                Head = (DoublyNode<T>)base.Head;
-
-            }
-            Tail = (DoublyNode<T>)base.Tail;
-
+            base.Add(value);            
         }
 
         protected override Node<T> CreateNode(T value)
