@@ -27,7 +27,7 @@ namespace DoblyCollection
 
         public virtual void Add(T value)
         {
-            var NodeValue = GetNodeType(value);
+            var NodeValue = CreateNode(value);
 
             if (Head == null)
             {
@@ -35,20 +35,19 @@ namespace DoblyCollection
             }
             else
             {
-                GetTail(NodeValue, Tail);
-                //Tail.Next = NodeValue;
+                setTail(NodeValue);
             }
             Tail = NodeValue;
             count++;
         }
 
-        protected virtual Node<T> GetNodeType(T value)
+        protected virtual Node<T> CreateNode(T value)
         {
             Node<T> node = new Node<T>(value);
             return node;
         }
 
-        protected virtual void GetTail(Node<T> NodeValue, Node<T> Tail)
+        protected virtual void setTail(Node<T> NodeValue/*, Node<T> Tail*/)
         {
             Tail.Next = NodeValue;
         }

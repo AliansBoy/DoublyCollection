@@ -8,42 +8,36 @@ namespace DoblyCollection
 {
     class DoublyCustomList<T> : CustomList<T>
     {
-        DoublyNode<T> Head; //link on first element
-        DoublyNode<T> Tail; //link on Last element
         public override void Add(T value)
         {
-            //var DoublyNodeValue = new DoublyNode<T>(value);
+            var DoublyNodeValue = new DoublyNode<T>(value);
             base.Add(value);
             if (Head == null)
             {
                 Head = (DoublyNode<T>)base.Head;
-                
+
             }
-            //else
-            //{
-            //    DoublyNodeValue.Previous = Tail;
-            //}
             Tail = (DoublyNode<T>)base.Tail;
 
         }
 
-        protected override Node<T> GetNodeType(T value)
+        protected override Node<T> CreateNode(T value)
         {
             DoublyNode<T> node = new DoublyNode<T>(value);
             return node;
         }
 
-        protected override void GetTail(Node<T> NodeValue, Node<T> Tail)
+        protected override void setTail(Node<T> NodeValue)
         {
-            base.GetTail(NodeValue, Tail);
-            ((DoublyNode<T>)NodeValue).Previous = (DoublyNode<T>)Tail;
+            base.setTail(NodeValue);
+            ((DoublyNode<T>)NodeValue).Previous = (DoublyNode<T>)base.Tail;
         }
 
         public override bool Delete(T value)
         {
-            DoublyNode<T> current = Head;
-            DoublyNode<T> currentHead = Head;
-            DoublyNode<T> currentTail = Tail;
+            DoublyNode<T> current = (DoublyNode<T>)base.Head;
+            DoublyNode<T> currentHead = (DoublyNode<T>)base.Head;
+            DoublyNode<T> currentTail = (DoublyNode<T>)base.Tail;
 
 
             while (current != null)
@@ -92,7 +86,7 @@ namespace DoblyCollection
 
         public IEnumerable<T> BackEnumerator()
         {
-            DoublyNode<T> current = Tail;
+            DoublyNode<T> current = (DoublyNode<T>)base.Tail;
             while (current != null)
             {
                 yield return current.Element;
